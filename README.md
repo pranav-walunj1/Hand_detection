@@ -1,4 +1,4 @@
-Hand Tracking with MediaPipe and OpenCV - for one test angle, i.e. 3 handlandmark points : (Currently it is at the testing mode)
+Hand Tracking with MediaPipe and OpenCV - for one test angle, i.e. 3 handlandmark points : (Currently it is at the testing phase, thst's why only on one joint for now)
 
 - Features
   -  Real-time hand tracking using MediaPipe.
