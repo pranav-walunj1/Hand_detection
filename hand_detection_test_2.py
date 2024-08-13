@@ -17,27 +17,29 @@ def calculate_angle_between_lines(A, B, C):
     C = np.array(C)  # Convert point C to a numpy array
     
     # Calculate vectors AB and BC
-    AB = B - A  # Vector from A to B
+    AB = A - B  # Vector from A to B
     BC = C - B  # Vector from B to C
     
     # Calculate the dot product of AB and BC
-    dot_product = np.dot(AB, BC)
+    dot_product = AB @ BC
     
     # Calculate the magnitudes of AB and BC
     magnitude_AB = np.linalg.norm(AB)
     magnitude_BC = np.linalg.norm(BC)
-    
+
     # Calculate the cosine of the angle
     cos_theta = dot_product / (magnitude_AB * magnitude_BC)
-    
+
+    # Clamp cos_theta to the range [-1, 1] to avoid domain errors
+    cos_theta = np.clip(cos_theta, -1.0, 1.0)
+
     # Calculate the angle in radians
     angle_radians = np.arccos(cos_theta)
-    
+
     # Convert the angle to degrees
     angle_degrees = np.degrees(angle_radians)
-    
-    return angle_degrees
 
+    return angle_degrees
 
 
 cap = cv2.VideoCapture(0)
@@ -69,18 +71,18 @@ while True:
                     index_finger_joint_2 = hand_landmarks.landmark[joints[1]]
                     index_finger_joint_3 = hand_landmarks.landmark[joints[2]]
 
-                    # Convert to pixel coordinates
-                    joint1 = [int(index_finger_joint_1.x * w), int(index_finger_joint_1.y * h), index_finger_joint_1.z]
-                    joint2 = [int(index_finger_joint_2.x * w), int(index_finger_joint_2.y * h), index_finger_joint_2.z]
-                    joint3 = [int(index_finger_joint_3.x * w), int(index_finger_joint_3.y * h), index_finger_joint_3.z]
-                    # Calculate the angle
-                    angle = calculate_angle_between_lines(joint1, joint2, joint3)
-                    print(f'Angle at Index Finger Joint: {angle:.2f} degrees')
+                    
                     
                         # Optionally, you can draw circles on the landmarks
-                    cv2.circle(image, (cx, cy), 5, (0, 255, 0), cv2.FILLED)
-                    varrr = 1
-                   
+                    cv2.circle(image, (cx, cy), 3, (255, 255, 0), cv2.FILLED)
+                    #varrr = 1
+                # Convert to pixel coordinates
+                joint1 = [index_finger_joint_1.x , index_finger_joint_1.y , index_finger_joint_1.z]
+                joint2 = [index_finger_joint_2.x , index_finger_joint_2.y , index_finger_joint_2.z]
+                joint3 = [index_finger_joint_3.x , index_finger_joint_3.y , index_finger_joint_3.z]
+                # Calculate the angle
+                angle = calculate_angle_between_lines(joint1, joint2, joint3)
+                print(f'Angle at Index Finger Joint{joints[0]},{joints[1]},{joints[2]}: {angle:.2f} degrees')
     cv2.imshow('HandTracker', image)
     if cv2.waitKey(1) & 0xFF == ord('q'):  # Press 'q' to exit
         break
