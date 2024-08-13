@@ -1,3 +1,5 @@
+# Calculating angle for one test joint
+
 import cv2
 import mediapipe as mp
 import numpy as np
@@ -29,7 +31,7 @@ def calculate_angle_between_lines(A, B, C):
     
     # Calculate the cosine of the angle
     cos_theta = dot_product / (magnitude_AB * magnitude_BC)
-    
+    print(f'cose theta before clipping is :{cos_theta}')
     # Clamp cos_theta to the range [-1, 1] to avoid domain errors
     cos_theta = np.clip(cos_theta, -1.0, 1.0)
     
@@ -66,14 +68,14 @@ while True:
                     cx, cy = int(landmark.x * w), int(landmark.y * h)  # convert to pixel coordinates
                     print(f'Landmark {idx}: x={cx}, y={cy}, z={landmark.z}')
                     
-                    # Example for the index finger
-                    index_finger_joint_1 = hand_landmarks.landmark[joints[0]]
-                    index_finger_joint_2 = hand_landmarks.landmark[joints[1]]
-                    index_finger_joint_3 = hand_landmarks.landmark[joints[2]]
-                    
                     # Optionally, you can draw circles on the landmarks
                     cv2.circle(image, (cx, cy), 3, (255, 255, 0), cv2.FILLED)
                     # varrr = 1
+
+                # testing for the index finger
+                index_finger_joint_1 = hand_landmarks.landmark[joints[0]]
+                index_finger_joint_2 = hand_landmarks.landmark[joints[1]]
+                index_finger_joint_3 = hand_landmarks.landmark[joints[2]]
                 # Convert to pixel coordinates
                 joint1 = [index_finger_joint_1.x, index_finger_joint_1.y, index_finger_joint_1.z]
                 joint2 = [index_finger_joint_2.x, index_finger_joint_2.y, index_finger_joint_2.z]
