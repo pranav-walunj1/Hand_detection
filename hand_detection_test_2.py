@@ -8,7 +8,7 @@ mp_hands = mp.solutions.hands
 joint1 = -1
 joint2 = -1
 joint3 = -1
-joints = [5,6,7]
+joints = [5,6,7] #here you can enter the list of joints on which, the angle formed at middle joint will be calculated below 
 
 
 def calculate_angle_between_lines(A, B, C):
