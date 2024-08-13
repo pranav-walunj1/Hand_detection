@@ -1,8 +1,8 @@
-Hand Tracking with MediaPipe and OpenCV - for one test angle, i.e. 3 handlandmark points : (Currently it is at the testing phase, thst's why only on one joint for now)
+Hand Tracking with MediaPipe and OpenCV - (Currently it is at the testing phase)
 
 - Features
   -  Real-time hand tracking using MediaPipe.
-  -  Angle calculation between specified joints of the index finger.
+  -  Angle calculation between specified joints of the finger.
   -  Visualization of hand landmarks and angles on the video feed.
   
 - Imports: 
@@ -16,3 +16,7 @@ Hand Tracking with MediaPipe and OpenCV - for one test angle, i.e. 3 handlandmar
   - Calculates and prints the angle between specific joints of the index finger.
   - Visualizes hand landmarks and angles on the video feed.
 
+  - Files :
+    - hand_detection_test.py :  only detects hands
+    - hand_detection_test_1.py : calculates one angle between given 3 joints(A,B,C), angle formed at B, with vectos AB and BC
+    - hand_detection_test_2-py : calculates all possible angles based on given joint combinations in 'joints' 2D array
